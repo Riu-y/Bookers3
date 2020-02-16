@@ -1,0 +1,19 @@
+<%= render 'layouts/list', {user: @user, book:@book } %>
+<table>
+  <thred>
+  	<tr>
+  		<th>Image</th>
+  		<th>Name</th>
+  		<th></th>
+  	</tr>
+  </thred>
+  <% @users.each do |user| %>
+  <tbody>
+  	<tr>
+       <td><%= attachment_image_tag user, :profile_image, :fill, 50,50, format:'jpeg' %></td>
+      <td><%= user.name %></td>
+	  	<td><%=link_to "Show", show_user_path(user.id) %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

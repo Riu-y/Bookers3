@@ -1,0 +1,28 @@
+sample_user
+0y1a1r2y5u@i.softbank.jp
+yagi11
+
+yagishita tarou
+0y1a1r2y5u@docomo.ne.jp
+yagi12
+
+sample user3
+0y1a1r2y5u@ezweb.ne.jp
+yagi14
+
+
+
+-- 質問 --
+
+/user/1にbookの詳細ページを出せない
+変数を渡していうるつもりがNomethod errorになってしまう。
+試したこと
+　ページャ機能
+
+
+　投稿したユーザーの画像を表示する場合は以下の記述であってますか？
+<%= attachment_image_tag users, :profile_image, :fill, 60, 60, fallback: "no_image.jpg" %>
+<%= attachment_image_tag 保存先インスタンス名, :保存先カラム名, :サイズ（横幅,高さ）, 画像拡張子, 代替画像 %>
+
+
+_listの＠マークは外す場所は全てで大丈でしたか？

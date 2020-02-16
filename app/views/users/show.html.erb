@@ -1,0 +1,21 @@
+<%= render 'layouts/list', {user: @user, book:@book } %>
+
+<table>
+  <thred>
+  	<tr>
+  		<th></th>
+  		<th>Title</th>
+  		<th>Opinion</th>
+  	</tr>
+  </thred>
+  <tbody>
+    <% @book.each do |book| %>
+  	<tr>
+	  	<td><%= attachment_image_tag users, :profile_image, :fill, 50,50, format:'jpeg' %></td>
+	  	<td><%= book.title %></td>
+	  	<td><%= book.body %></td>
+    </tr>
+    <% end %>
+    <%= paginate @books, class: "paginate" %>
+  </tbody>
+</table>
