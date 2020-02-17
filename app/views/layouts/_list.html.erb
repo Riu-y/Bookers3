@@ -1,17 +1,19 @@
+<%= flash[:notice] %>
 <!-- ユーザー情報画面 -->
  <h1>Userinfo</h1>
  <%= attachment_image_tag user, :profile_image,:fill,60,60,format:'jpeg', class: "img-profile", fallback: "no_image.jpg" %>
 
     <table>
       <tr>
-        <td>Name</td>
+        <td>Name</td><br>
         <td><%= user.name %></td>
       </tr>
       <tr>
-        <td>Introduction</td>
+        <td>Introduction</td><br>
         <td><%= user.introduction %></td>
       </tr>
     </table>
+    <br>
   <div class="profile-edit-button">
     <% if user.id == current_user.id %>
      <p><%= link_to"プロフィール編集",edit_user_path(user) %>  </p>
