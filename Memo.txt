@@ -18,6 +18,8 @@ yagi14
 
 -- 質問 --
 
+・authentic userの置き場所
+
 
 
 
@@ -80,3 +82,69 @@ yagi14
            <p>CopyRight Infratop.inc</p>
           </footer>
 </html>
+
+
+
+
+18時
+
+ <nav class="navbar navbar-inverse">
+      <div class="container">
+       <div class="row">
+         <div class ="col-lg-6">
+           <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+            <h2 class="navbar-brand" href="#">Booker</h2>
+          </div>
+        </div>
+      </div>
+      <div class ="col-lg-6">
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+              <% if user_signed_in? %>
+                <li><span class="glyphicon glyphicon-home" aria-hidden="true"><%= link_to"Home", user_path(current_user.id) %></span></li>
+                <li><span class="glyphicon glyphicon-user" aria-hidden="true"><%= link_to "Users",users_path %></span></li>
+                <li><span class="glyphicon glyphicon-book" aria-hidden="true"><%= link_to "Book", books_path %></span></li>
+                <li><span class="glyphicon glyphicon-log-in" aria-hidden="true"><%= link_to "Logout",destroy_user_session_path, method: :delete %></span></li>
+            </ul>
+              <% else %>
+            <ul class="nav navbar-nav navbar-right">
+                <li><span class="glyphicon glyphicon-home" aria-hidden="true"><%= link_to "Home" ,root_path(@user) %></span></li>
+                <li><span class="glyphicon glyphicon-link" aria-hidden="true"><%= link_to "About" ,homes_about_path %></span></li>
+                <li><span class="glyphicon glyphicon-pencil" aria-hidden="true"><%= link_to "sign up", new_user_registration_path %></span></li>
+                <li><span class="glyphicon glyphicon-log-in" aria-hidden="true"><%= link_to "login", new_user_session_path %></span></li>
+            </ul>
+            </div>
+          <% end %>
+         <%= yield %>
+        </div>
+       </div>
+      </div>
+     </nav>
+
+<% if @users.errors.any? %>
+    <% @users.errors.full_messages.each do |message| %>
+    <span><%= message %></span>
+  <% end %>
+<% end %>
+
+
+
+
+<%= link_to user_path(user.id) do %>
+                <%= attachment_image_tag book.user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg" %>
+                <% end 
+
+
+                <% if book.errors.any? %>
+ <div class="alert">
+    <% book.errors.full_messages.each do |message| %>
+    <span><%= message %></span>
+  <% end %>
+</div>
+<% end %>

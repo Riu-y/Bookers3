@@ -1,4 +1,5 @@
 class BooksController < ApplicationController
+  before_action :authenticate_user! , only: [:show, :new, :edit, :index, :new]
   def new
   	@book = Book.new
   end
@@ -7,28 +8,40 @@ class BooksController < ApplicationController
   	@book = Book.new(book_params)
   	@book.user_id = current_user.id
     if @book.save
-    	flash[:notice] = "you have created book successfully."
-       redirect_to books_path(@book.id)
+    	flash[:notice] = "You have created book successfully."
+       redirect_to book_path(@book.id)
     else
-    	flash[:notice] = "Not entered !!"
+    	flash[:notice] = "Error !!"
       @books = Book.all
-      @user = User.find(params[:id]
+      @user = User.find(current_user.id)
     	render 'index'
     end
   end
   def index
+    @user = current_user
   	@books = Book.all
   	@book = Book.new
-  	@user = current_user
   end
   def show
   	@bookfind = Book.find(params[:id])
   	@book = Book.new
-  	@user = User.find(params[:id])
+  	@user = User.find(@bookfind.user_id)
   end
+
   def edit
-  	@book = Book.fnd(params[:id])
-　　　flash[:notice] = "You have updated book successfully."
+  	@book = Book.find(params[:id])
+    redirect_to books_path unless @book.user_id == current_user.id
+  end
+
+  def update
+    @book = Book.find(params[:id])
+    if @book.update(book_params)
+    flash[:notice] = "You have updated book successfully."
+    redirect_to book_path(@book.id)
+     else
+     flash[:notice] = "Error !!"
+     render 'edit'
+    end
   end
 
   def destroy
